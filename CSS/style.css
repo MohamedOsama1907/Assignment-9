@@ -1,0 +1,380 @@
+body {
+  font-family: "Inter", sans-serif;
+}
+* {
+  box-sizing: border-box !important;
+}
+
+h1 {
+  font-size: 24px !important;
+  font-weight: 700;
+  line-height: 32px;
+  color: #000;
+  span {
+    color: #7f22fe;
+  }
+}
+.contactIcon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(
+    90deg,
+    rgba(127, 35, 254, 1) 0%,
+    rgba(81, 57, 247, 1) 100%
+  );
+  i {
+    font-size: 18px;
+    color: #fff;
+  }
+}
+.ContantInfo p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.addContact {
+  background: #7f23fe;
+  background: linear-gradient(
+    90deg,
+    rgba(127, 35, 254, 1) 0%,
+    rgba(81, 57, 247, 1) 100%
+  );
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba(127, 35, 254, 1) 0%,
+      rgba(81, 57, 247, 1) 100%
+    );
+    box-shadow: 0px 4px 8px rgba(127, 35, 254, 0.5);
+    transform: translateY(-3px);
+  }
+}
+
+.avatarImage {
+  width: 45px;
+  height: 45px;
+}
+.navbarIcon span {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: #f3f4f6;
+    color: #364153 !important;
+  }
+}
+
+/* About Contract Section */
+.aboutContract {
+  padding: 100px 0 50px;
+}
+.aboutContractIcon {
+  width: 45px;
+  height: 45px;
+}
+.total {
+  background: #287aff;
+  background: linear-gradient(
+    135deg,
+    rgba(40, 122, 255, 1) 0%,
+    rgba(24, 98, 253, 1) 100%
+  );
+}
+.favorites {
+  background: #ffb100;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 177, 0, 1) 0%,
+    rgba(255, 116, 0, 1) 100%
+  );
+}
+.emergency {
+  background: #fe1c51;
+  background: linear-gradient(
+    135deg,
+    rgba(254, 28, 81, 1) 0%,
+    rgba(234, 0, 27, 1) 100%
+  );
+}
+.textDetails p:first-child {
+  font-size: 13px;
+}
+.box {
+  border-color: #f6f3f4 !important;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.2);
+}
+.box:hover {
+  box-shadow: 0px 3px 7px -1px rgba(0, 0, 0, 0.25);
+}
+/* All Contacts Section */
+.topLeftSide h2 {
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #101828;
+}
+.topLeftSide p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #6a7282;
+}
+
+::placeholder {
+  color: #8894ac !important;
+  font-size: 14px;
+}
+.searchInput .search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.searchInput input {
+  padding-left: 35px;
+}
+
+.searchInput input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.searchInput {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+/* by searching on the (focus-within)==> Without :focus-within, you can only style the input
+  When the user clicks inside the input, the div.search-box gets styled even though the div itself is not focused.
+*/
+.searchInput:focus-within {
+  border-color: #7f23fe !important; /* your desired focus color */
+  box-shadow: 0 0 0 3px rgba(126, 35, 254, 0.25); /* outline glow */
+  outline: none;
+}
+.searchInput input:focus {
+  outline: none;
+  box-shadow: none;
+}
+/* bottom left side */
+.nocontactsIcon {
+  width: 80px;
+  height: 80px;
+  background-color: #f3f4f6;
+  color: #d1d5dc;
+}
+
+/* right side */
+.rightSide > div {
+  border: 2px solid #f6f3f4 !important ;
+}
+.favoritesCard .topPart {
+  background-color: #fff8ed;
+}
+.emergencyCard .topPart {
+  background-color: #fff2f2;
+}
+.favoritesCard .topPart span {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  background: #ffb810;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 184, 16, 1) 0%,
+    rgba(255, 117, 0, 1) 100%
+  );
+}
+.emergencyCard .topPart span {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  background: #fe3363;
+  background: linear-gradient(
+    135deg,
+    rgba(254, 51, 99, 1) 0%,
+    rgba(236, 0, 33, 1) 100%
+  );
+}
+.favoritesCard .topPart h3,
+.emergencyCard .topPart h3 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.favoritesCard .topPart p,
+.emergencyCard .topPart p {
+  color: #6a7282;
+  font-size: 11px;
+  line-height: 17px;
+  font-weight: 400;
+}
+
+/* Modal */
+.modal-dialog {
+  max-width: 40% !important;
+}
+.userIcon {
+  width: 96px;
+  height: 96px;
+}
+
+/* label */
+.formLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: #101828;
+}
+input,
+select {
+  font-size: 14px !important;
+  padding: 10px 16px !important;
+}
+/* handeling the scrollbar */
+/* Because the actual scrolling happens on .modal-body,tells Bootstrap: “make the body area scrollable.” */
+.modal-dialog-scrollable .modal-body {
+  scrollbar-width: none !important;
+}
+select {
+  font-size: 14px !important;
+  color: #101828;
+}
+textarea {
+  resize: none;
+}
+input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+}
+.modal-footer button {
+  width: calc(50% - 4px) !important;
+}
+.modal-footer button:first-child {
+  background-color: #f3f4f6;
+  color: #364153;
+  font-size: 14px;
+}
+.modal-footer button:last-child {
+  background: #7f23fe;
+  background: linear-gradient(
+    90deg,
+    rgba(127, 35, 254, 1) 0%,
+    rgba(81, 57, 247, 1) 100%
+  );
+  font-size: 14px;
+}
+
+.contactDetails > span {
+  background: #fd9400;
+  background: linear-gradient(
+    135deg,
+    rgba(253, 148, 0, 1) 0%,
+    rgba(247, 88, 0, 1) 100%
+  );
+}
+.contactDetails .aboutContractIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.phoneIcone {
+  background-color: #dbeafe;
+  width: 25px;
+  height: 25px;
+  font-size: 11px;
+}
+.phoneIcone + p {
+  font-size: 15px;
+}
+.aboutContractIcon div {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  i {
+    font-size: 9px;
+  }
+}
+.mailIcon,
+.locationIcon {
+  width: 25px;
+  height: 25px;
+  font-size: 11px;
+}
+.mailIcon {
+  color: #7f22fe;
+  background-color: #ede9fe;
+}
+.locationIcon {
+  background-color: #d0fae5;
+  color: #0a9e6c;
+}
+.mailIcon + p,
+.locationIcon + p {
+  font-size: 14px;
+  color: #4a5565;
+}
+.aboutContractIcon .favoriteMark {
+  top: -10%;
+  right: -10%;
+  background: #fd9400;
+  background: linear-gradient(
+    135deg,
+    rgba(253, 148, 0, 1) 0%,
+    rgba(247, 88, 0, 1) 100%
+  );
+}
+.aboutContractIcon .emergencyMark {
+  bottom: -10%;
+  right: -10%;
+  background: #fe3363;
+  background: linear-gradient(
+    135deg,
+    rgba(254, 51, 99, 1) 0%,
+    rgba(236, 0, 33, 1) 100%
+  );
+}
+.badge1 {
+  color: #8200db;
+  font-size: 13px;
+  background-color: #f3e8ff;
+}
+.badge2 {
+  color: #eb0040;
+  font-size: 13px;
+  background-color: #fff1f2;
+}
+.links .linkIcon {
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+}
+.links .phoneLinkIcon {
+  color: #0a9e6c;
+  background-color: #d0fae5;
+}
+.links .mailLinkIcon {
+  color: #7f22fe;
+  background-color: #ede9fe;
+}
+.buttons .actionBtn {
+  width: 35px;
+  height: 35px;
+  padding: 0 !important;
+  border: 0;
+  font-size: 14px;
+}
+.buttons .favoriteBtn {
+  color: #ffb100;
+  background-color: #fff8ed;
+}
+.buttons .emergencyBtn {
+  color: #fe1c51;
+  background-color: #fff2f2;
+}
+.buttons .editBtn,
+.buttons .deleteBtn {
+  background-color: transparent;
+}
