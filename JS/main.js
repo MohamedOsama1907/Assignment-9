@@ -19,14 +19,27 @@ var contactPlace = document.getElementById("contactPlace");
 var addBtn = document.getElementById("addBtn");
 var updateBtn = document.getElementById("updateBtn");
 var updateIndex;
-var totalCount = document.getElementById("totalCount");
+var totalCount1 = document.getElementById("totalCount1");
+var totalCount2 = document.getElementById("totalCount2");
 var favoriteCount = document.getElementById("favoriteCount");
 var emergencyCount = document.getElementById("emergencyCount");
-
+var favoriteContacts = document.getElementById("favoriteContacts");
+var emergencyContacts = document.getElementById("emergencyContacts");
+updateStatics();
 display(allContacts);
 
 // add contact function
 function addContact() {
+  /*   // Validation: Check if name and phone are filled
+  if (!contactName.value.trim()) {
+    alert("Full Name is required");
+    return;
+  }
+  if (!contactPhone.value.trim()) {
+    alert("Phone Number is required");
+    return;
+  } */
+
   var contact = {
     contactPhoto: "./Images/" + contactPhoto.files[0]?.name || "",
     contactName: contactName.value,
@@ -42,6 +55,7 @@ function addContact() {
   allContacts.push(contact);
   localStorage.setItem("allContacts", JSON.stringify(allContacts));
   display(allContacts);
+  updateStatics();
   clearForm();
 }
 // clear form
@@ -59,6 +73,8 @@ function clearForm() {
 // display function
 function display(arr) {
   var cartona = ``;
+  var favCartona = ``;
+  var emgCartona = ``;
   if (arr.length === 0) {
     contactPlace.innerHTML = `
     <div class="bottomLeftSide py-5">
@@ -95,6 +111,8 @@ function display(arr) {
                           class="position-absolute border-2 border bg-warning border-white d-flex align-items-center justify-content-center rounded-circle favoriteMark">
                           <i class="fas fa-star"></i>
                  </div>`;
+        favCartona += `
+    `;
       }
 
       if (arr[i].emergencyCheckbox) {
@@ -103,7 +121,10 @@ function display(arr) {
                           <i class="fa-solid fa-heart-pulse"></i>
                    </div>`;
         contactBadges += `<span class="badge badge2 fw-medium px-3 py-2">Emergency</span>`;
+        favCartona += `
+    `;
       }
+
       cartona += `
       <div class="col-12 col-md-6">
                   <div class="box rounded-4 border border-2 p-3">
@@ -201,6 +222,8 @@ function display(arr) {
                 </div>`;
     }
     contactPlace.innerHTML = cartona;
+    // emergencyContacts.innerHTML = emgCartona;
+    // favoriteContacts.innerHTML = favCartona;
   }
 }
 
@@ -209,6 +232,7 @@ function deleteContact(index) {
   allContacts.splice(index, 1);
   localStorage.setItem("allContacts", JSON.stringify(allContacts));
   display(allContacts);
+  updateStatics();
 }
 
 // search fnuction
@@ -256,15 +280,32 @@ function updateContact() {
   allContacts[updateIndex].favoriteCheckbox = favoriteCheckbox.checked;
   allContacts[updateIndex].emergencyCheckbox = emergencyCheckbox.checked;
   display(allContacts);
+  updateStatics();
   clearForm();
   // to update the local storage
   localStorage.setItem("allContacts", JSON.stringify(allContacts));
   addBtn.classList.remove("d-none");
   updateBtn.classList.add("d-none");
 }
-
 // updateStatics
-
-function updateStatics() {}
-var ayhaga = allContacts.length();
-totalCount.innerHTML = ayhaga;
+function updateStatics() {
+  totalCount1.innerHTML = allContacts.length;
+  totalCount2.innerHTML = allContacts.length;
+  var favorites = 0;
+  var emergencies = 0;
+  for (var i = 0; i < allContacts.length; i++) {
+    if (allContacts[i].favoriteCheckbox) {
+      // to count the number of favorites
+      favorites++;
+    }
+    if (allContacts[i].emergencyCheckbox) {
+      // to count number of emergencies
+      emergencies++;
+    }
+  }
+  favoriteCount.innerHTML = favorites;
+  emergencyCount.innerHTML = emergencies;
+  
+  // Update favorite contacts display
+  displayFavoriteContacts();
+}
