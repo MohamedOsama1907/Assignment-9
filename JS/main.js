@@ -25,6 +25,8 @@ var favoriteCount = document.getElementById("favoriteCount");
 var emergencyCount = document.getElementById("emergencyCount");
 var favoriteContacts = document.getElementById("favoriteContacts");
 var emergencyContacts = document.getElementById("emergencyContacts");
+var favoriteBtn = document.getElementById("favoriteBtn");
+var emergencyBtn = document.getElementById("emergencyBtn");
 updateStatics();
 display(allContacts);
 
@@ -95,6 +97,13 @@ function display(arr) {
                 </p>
               </div>
     `;
+    // to  upadate the data when i reload the page
+    favoriteContacts.innerHTML = `
+      <p class="text-muted text-center fs-6 py-3 mb-0">no favorite contacts</p>
+    `;
+    emergencyContacts.innerHTML = `
+      <p class="text-muted text-center fs-6 py-3 mb-0">no emergency contacts</p>
+    `;
   } else {
     for (let i = 0; i < arr.length; i++) {
       var badge1 = ``;
@@ -112,6 +121,32 @@ function display(arr) {
                           <i class="fas fa-star"></i>
                  </div>`;
         favCartona += `
+                        <div class="col-12 col-md-6 col-xxl-12">
+                          <div
+                            class="d-flex align-items-center justify-content-between p-2 rounded-2 border boredr-1  mb-2">
+                            <div class="d-flex align-items-center column-gap-2">
+                              <span
+                                style="width: 40px; height: 40px"
+                                class="rounded-3 bg-warning"></span>
+                              <div>
+                                <h3
+                                  class="mb-1 fw-bold text-black"
+                                  style="font-size: 14px">
+                                  ${arr[i].contactName}
+                                </h3>
+                                <p class="mb-0" style="font-size: 13px">
+                                  ${arr[i].contactPhone}
+                                </p>
+                              </div>
+                            </div>
+                            <span
+                              style="width: 30px; height: 30px"
+                              class="d-flex align-items-center justify-content-center rounded text-secondary bg-light">
+                              <i class="fa-solid fa-phone"></i>
+                            </span>
+                          </div>
+                        </div>
+                 
     `;
       }
 
@@ -121,7 +156,32 @@ function display(arr) {
                           <i class="fa-solid fa-heart-pulse"></i>
                    </div>`;
         contactBadges += `<span class="badge badge2 fw-medium px-3 py-2">Emergency</span>`;
-        favCartona += `
+        emgCartona += `
+                        <div class="col-12 col-md-6 col-xxl-12">
+                          <div
+                            class="d-flex align-items-center justify-content-between p-2 rounded-2 border boredr-1  mb-2">
+                            <div class="d-flex align-items-center column-gap-2">
+                              <span
+                                style="width: 40px; height: 40px"
+                                class="rounded-3 bg-danger"></span>
+                              <div>
+                                <h3
+                                  class="mb-1 fw-bold text-black"
+                                  style="font-size: 14px">
+                                  ${arr[i].contactName}
+                                </h3>
+                                <p class="mb-0" style="font-size: 13px">
+                                  ${arr[i].contactPhone}
+                                </p>
+                              </div>
+                            </div>
+                            <span
+                              style="width: 30px; height: 30px"
+                              class="d-flex align-items-center justify-content-center rounded text-secondary bg-light">
+                              <i class="fa-solid fa-phone"></i>
+                            </span>
+                          </div>
+                        </div>
     `;
       }
 
@@ -188,18 +248,55 @@ function display(arr) {
                       </div>
                       <div
                         class="buttons d-flex align-items-center column-gap-2">
-                        <button
+                        ${
+                          allContacts[i].favoriteCheckbox
+                            ? `<button
                           type="button"
                           title="Add to favorites"
-                          class="actionBtn favoriteBtn btn d-flex align-items-center justify-content-center rounded-3">
+                          onclick="togleFav(${i})"  
+                          class="actionBtn
+                            favoriteBtn
+                            btn
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            rounded-3">
                           <i class="fa-solid fa-star"></i>
-                        </button>
-                        <button
+                        </button>`
+                            : `<button
+                              onclick="togleFav(${i})"  
+                              type="button"
+                              title="Add to favorites"
+                              class="text-muted border-0 bg-transparent">
+                          <i class="fa-regular fa-star"></i>
+                        </button>`
+                        }
+                      
+                 ${
+                   allContacts[i].emergencyCheckbox
+                     ? `<button
                           type="button"
-                          title="Mark as emergency"
-                          class="actionBtn emergencyBtn btn d-flex align-items-center justify-content-center rounded-3">
+                          title="Add to favorites"
+                          onclick="togleEmg(${i})"
+                          class="actionBtn
+                                 emergencyBtn
+                                 btn
+                                 d-flex
+                                 align-items-center
+                                 justify-content-center
+                                 "rounded-3">
                           <i class="fa-solid fa-heart-pulse"></i>
-                        </button>
+                        </button>`
+                     : ` <button
+                          type="button"
+                          onclick="togleEmg(${i})"
+                          title="Mark as emergency"
+                          class="text-muted border-0 bg-transparent">
+                          <i class="fa-regular fa-heart"></i>
+                        </button>`
+                 }
+                         
+                       
                         <button
                           type="button"
                           onclick="setFormForUpdate(${i})"
@@ -222,8 +319,16 @@ function display(arr) {
                 </div>`;
     }
     contactPlace.innerHTML = cartona;
-    // emergencyContacts.innerHTML = emgCartona;
-    // favoriteContacts.innerHTML = favCartona;
+    favoriteContacts.innerHTML =
+      favCartona ||
+      `
+      <p class="text-muted text-center fs-6 py-3 mb-0">no favorite contacts</p>
+    `;
+    emergencyContacts.innerHTML =
+      emgCartona ||
+      `
+      <p class="text-muted text-center fs-6 py-3 mb-0">no emergency contacts</p>
+    `;
   }
 }
 
@@ -305,7 +410,102 @@ function updateStatics() {
   }
   favoriteCount.innerHTML = favorites;
   emergencyCount.innerHTML = emergencies;
-  
-  // Update favorite contacts display
-  displayFavoriteContacts();
 }
+
+// togleFav function
+function togleFav(index) {
+  // to togle the value of favoritecheckbox
+  allContacts[index].favoriteCheckbox = !allContacts[index].favoriteCheckbox;
+  // to update the new data
+  localStorage.setItem("allContacts", JSON.stringify(allContacts));
+  display(allContacts);
+  updateStatics();
+}
+// togleEmg function
+function togleEmg(index) {
+  // to togle the value of emergencyCheckbox
+  allContacts[index].emergencyCheckbox = !allContacts[index].emergencyCheckbox;
+  // to update the new data
+  localStorage.setItem("allContacts", JSON.stringify(allContacts));
+  display(allContacts);
+  updateStatics();
+}
+// dynamic validation
+function dynamicValidation(element) {
+  // element.id === regex[]
+  // we make it dynamic by put the input.id === values of regex object
+  var regex = {
+    contactName: /^[A-Z][A-Za-z]{2,12}(\s+[A-Za-z]{2,12})+$/,
+    contactPhone: /^(002|\+2)?01[0125]\d{8}$/,
+    contactEmail: /\w{3,30}@gmail.com/,
+  };
+
+  if (element.value.trim() === "") {
+    element.classList.remove("is-valid", "is-invalid");
+    element.classList.add("mb-3");
+    element.nextElementSibling.classList.add("d-none");
+  } else if (regex[element.id].test(element.value)) {
+    element.classList.add("is-valid", "mb-3");
+    element.classList.remove("is-invalid");
+    element.nextElementSibling.classList.add("d-none");
+  } else {
+    element.classList.add("is-invalid");
+    element.classList.remove("is-valid", "mb-3");
+    element.nextElementSibling.classList.remove("d-none");
+  }
+}
+
+/* // validationName function
+function validationName() {
+  var regex = /^[A-Z][A-Za-z]{2,12}(\s+[A-Za-z]{2,12})+$/;
+
+  if (contactName.value.trim() === "") {
+    contactName.classList.remove("is-valid", "is-invalid");
+    contactName.classList.add("mb-3");
+    contactName.nextElementSibling.classList.add("d-none");
+  } else if (regex.test(contactName.value)) {
+    contactName.classList.add("is-valid", "mb-3");
+    contactName.classList.remove("is-invalid");
+    contactName.nextElementSibling.classList.add("d-none");
+  } else {
+    contactName.classList.add("is-invalid");
+    contactName.classList.remove("is-valid", "mb-3");
+    contactName.nextElementSibling.classList.remove("d-none");
+  }
+}
+// validationPhone function
+function validationPhone() {
+  var regex = /^(002|\+2)?01[0125]\d{8}$/;
+
+  if (contactPhone.value.trim() === "") {
+    contactPhone.classList.remove("is-valid", "is-invalid");
+    contactPhone.classList.add("mb-3");
+    contactPhone.nextElementSibling.classList.add("d-none");
+  } else if (regex.test(contactPhone.value)) {
+    contactPhone.classList.add("is-valid", "mb-3");
+    contactPhone.classList.remove("is-invalid");
+    contactPhone.nextElementSibling.classList.add("d-none");
+  } else {
+    contactPhone.classList.add("is-invalid");
+    contactPhone.classList.remove("is-valid", "mb-3");
+    contactPhone.nextElementSibling.classList.remove("d-none");
+  }
+}
+// validationEmail function
+function validationEmail() {
+  var regex = /\w{3,30}@gmail.com/;
+
+  if (contactEmail.value.trim() === "") {
+    contactEmail.classList.remove("is-valid", "is-invalid");
+    contactEmail.classList.add("mb-3");
+    contactEmail.nextElementSibling.classList.add("d-none");
+  } else if (regex.test(contactEmail.value)) {
+    contactEmail.classList.add("is-valid", "mb-3");
+    contactEmail.classList.remove("is-invalid");
+    contactEmail.nextElementSibling.classList.add("d-none");
+  } else {
+    contactEmail.classList.add("is-invalid");
+    contactEmail.classList.remove("is-valid", "mb-3");
+    contactEmail.nextElementSibling.classList.remove("d-none");
+  }
+} */

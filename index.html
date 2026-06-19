@@ -186,11 +186,9 @@
                     </div>
                   </div>
                   <div class="bottomPart p-3">
-                    <p
-                      class="text-muted text-center fs-6 fw mb-0"
-                      id="favoriteContacts">
-                    
-                    </p>
+                    <div
+                      class="text-muted fs-6 row g-2 mb-0"
+                      id="favoriteContacts"></div>
                   </div>
                 </div>
               </div>
@@ -208,11 +206,9 @@
                     </div>
                   </div>
                   <div class="bottomPart p-3">
-                    <p
-                      class="text-muted text-center fs-6 fw py-3 mb-0"
-                      id="emergencyContacts">
-                      No emergency contacts
-                    </p>
+                    <div
+                      class="text-muted fs-6 row g-2 mb-0"
+                      id="emergencyContacts"></div>
                   </div>
                 </div>
               </div>
@@ -268,10 +264,16 @@
                 </label>
                 <input
                   type="text"
+                  oninput="dynamicValidation(this)"
                   name="contactName"
                   id="contactName"
                   placeholder="Enter Full Name"
                   class="form-control rounded-3 border-1 mb-3" />
+                <div
+                  class="text-danger p-1 fs-7 mb-2 d-none"
+                  style="font-size: 12px">
+                  Name should contain only letters and spaces (2-50 characters)
+                </div>
                 <label
                   class="mb-1 text-dark formLabel fw-medium"
                   for="contactPhone">
@@ -280,9 +282,15 @@
                 <input
                   type="tel"
                   name="contactPhone"
+                  oninput="dynamicValidation(this)"
                   id="contactPhone"
                   placeholder="e.g., 01113203572"
                   class="form-control rounded-3 border-1 mb-3" />
+                <div
+                  class="text-danger p-1 fs-7 mb-2 d-none"
+                  style="font-size: 12px">
+                  Please enter a valid Egyptian phone number
+                </div>
                 <label
                   class="mb-1 text-dark formLabel fw-medium"
                   for="contactEmail">
@@ -290,10 +298,16 @@
                 </label>
                 <input
                   type="email"
+                  oninput="dynamicValidation(this)"
                   name="contactEmail"
                   id="contactEmail"
                   placeholder="name@example.com"
                   class="form-control rounded-3 border-1 mb-3" />
+                <div
+                  class="text-danger p-1 fs-7 mb-2 d-none"
+                  style="font-size: 12px">
+                  Please enter a valid email address
+                </div>
                 <label
                   class="mb-1 text-dark formLabel fw-medium"
                   for="contactAddress">
@@ -371,6 +385,8 @@
                 <button
                   type="button"
                   id="addBtn"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                   onclick="addContact()"
                   class="btn text-white btn-primary rounded-3 border-0 fw-semibold m-0 py-2">
                   <i class="fa-solid fa-check me-2"></i>
@@ -379,10 +395,12 @@
                 <button
                   type="button"
                   id="updateBtn"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                   onclick="updateContact()"
                   class="btn text-white btn-primary rounded-3 border-0 fw-semibold m-0 py-2 d-none">
                   <i class="fa-solid fa-check me-2"></i>
-                  Save Contact
+                  Update Contact
                 </button>
               </div>
             </div>
@@ -390,6 +408,8 @@
         </div>
       </div>
     </main>
+    <!-- sweet alert link -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- bootstrap file -->
     <script src="./JS/bootstrap.bundle.min.js"></script>
     <script src="./JS/main.js"></script>
