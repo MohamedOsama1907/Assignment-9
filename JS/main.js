@@ -30,17 +30,60 @@ var emergencyBtn = document.getElementById("emergencyBtn");
 updateStatics();
 display(allContacts);
 
+// error alert function
+function errorAlert(title, text) {
+  Swal.fire({
+    icon: "error",
+    title,
+    text,
+  });
+}
+// fullName validation funcntion
+function nameValidation() {
+  if (contactName.value.trim() === "") {
+    errorAlert("Missing Name", "Please enter a name for the contact!");
+    return false;
+  }
+  // if the contact name validation isn't true == the alert will appear
+  if (!dynamicValidation(contactName)) {
+    errorAlert(
+      "Invalid Name",
+      "Name should contain only letters and spaces (2-50 characters).",
+    );
+    return false;
+  }
+  return true;
+}
+// phone validation funcntion
+function phoneValidation() {
+  if (contactPhone.value.trim() === "") {
+    errorAlert("Missing Phone", "Please enter a phone number!");
+    return false;
+  }
+  if (!dynamicValidation(contactPhone)) {
+    errorAlert("Invalid Phone", "Please enter a valid Egyptian phone number");
+    return false;
+  }
+  return true;
+}
+// email validation funcntion
+function emailValidation() {
+  if (contactEmail.value.trim() === "") {
+    errorAlert("Missing Email", "Please enter an email address!");
+    return false;
+  }
+  if (!dynamicValidation(contactEmail)) {
+    errorAlert("Invalid Email", "Please enter a valid email address!");
+    return false;
+  }
+  return true;
+}
 // add contact function
 function addContact() {
-  /*   // Validation: Check if name and phone are filled
-  if (!contactName.value.trim()) {
-    alert("Full Name is required");
+  // if the validation not true == stop the function
+  if (!nameValidation() || !phoneValidation() || !emailValidation()) {
     return;
   }
-  if (!contactPhone.value.trim()) {
-    alert("Phone Number is required");
-    return;
-  } */
 
   var contact = {
     contactPhoto: "./Images/" + contactPhoto.files[0]?.name || "",
@@ -50,15 +93,28 @@ function addContact() {
     contactAddress: contactAddress.value,
     contactGroup: contactGroup.value,
     notesArea: notesArea.value,
-    // we use .checked to check if the user choise the checkbox or not
-    favoriteCheckbox: favoriteCheckbox.checked, // return true or false
-    emergencyCheckbox: emergencyCheckbox.checked, // return true or false
+    favoriteCheckbox: favoriteCheckbox.checked,
+    emergencyCheckbox: emergencyCheckbox.checked,
   };
+
   allContacts.push(contact);
   localStorage.setItem("allContacts", JSON.stringify(allContacts));
+
   display(allContacts);
   updateStatics();
   clearForm();
+  // by searching how to close the modal only after add contact
+  var modalEl = document.getElementById("staticBackdrop");
+  var modalInstance = bootstrap.Modal.getInstance(modalEl);
+  modalInstance.hide();
+  // if all things are suitable ==> the success alert will appear
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Contact added successfully",
+    showConfirmButton: false,
+    timer: 1500,
+  });
 }
 // clear form
 function clearForm() {
@@ -71,6 +127,12 @@ function clearForm() {
   notesArea.value = "";
   favoriteCheckbox.checked = false;
   emergencyCheckbox.checked = false;
+
+  contactName.classList.remove("is-valid", "is-invalid");
+  contactPhone.classList.remove("is-valid", "is-invalid");
+  contactEmail.classList.remove("is-valid", "is-invalid");
+  addBtn.classList.remove("d-none");
+  updateBtn.classList.add("d-none");
 }
 // display function
 function display(arr) {
@@ -334,10 +396,29 @@ function display(arr) {
 
 // delete function
 function deleteContact(index) {
-  allContacts.splice(index, 1);
-  localStorage.setItem("allContacts", JSON.stringify(allContacts));
-  display(allContacts);
-  updateStatics();
+  Swal.fire({
+    title: "Delete Contact?",
+    text: `Are you sure you want to delete ${allContacts[index].contactName}
+           This action cannot be undone.`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#6B7280",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      allContacts.splice(index, 1);
+      localStorage.setItem("allContacts", JSON.stringify(allContacts));
+      display(allContacts);
+      updateStatics();
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your Contact has been deleted.",
+        timer: 1500,
+        icon: "success",
+      });
+    }
+  });
 }
 
 // search fnuction
@@ -371,7 +452,7 @@ function setFormForUpdate(index) {
   addBtn.classList.add("d-none");
   updateBtn.classList.remove("d-none");
   // ===============================================================================================
-  const modal = new bootstrap.Modal(document.getElementById("contactModal"));
+  var modal = new bootstrap.Modal(document.getElementById("contactModal"));
   modal.show();
 }
 // updateContact function
@@ -444,14 +525,17 @@ function dynamicValidation(element) {
     element.classList.remove("is-valid", "is-invalid");
     element.classList.add("mb-3");
     element.nextElementSibling.classList.add("d-none");
+    return false;
   } else if (regex[element.id].test(element.value)) {
     element.classList.add("is-valid", "mb-3");
     element.classList.remove("is-invalid");
     element.nextElementSibling.classList.add("d-none");
+    return true;
   } else {
     element.classList.add("is-invalid");
     element.classList.remove("is-valid", "mb-3");
     element.nextElementSibling.classList.remove("d-none");
+    return false;
   }
 }
 
