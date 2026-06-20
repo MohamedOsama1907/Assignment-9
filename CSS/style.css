@@ -378,3 +378,193 @@ input[type="checkbox"] {
 .buttons .deleteBtn {
   background-color: transparent;
 }
+html,
+body {
+  overflow-x: hidden;
+}
+/* ==================================responsive part===================== */
+
+/* =================MOBILE (max-width: 576px)============ */
+@media (max-width: 576px) {
+  .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-nav {
+    flex-direction: row !important;
+    align-items: center;
+    column-gap: 8px !important;
+  }
+  .navbar.py-3 {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
+  .navbar .container > div.d-flex {
+    column-gap: 8px !important;
+  }
+  .ContantInfo p {
+    display: none;
+  }
+  .contactIcon {
+    width: 36px;
+    height: 36px;
+  }
+  .contactIcon i {
+    font-size: 14px;
+  }
+  .addContact {
+    padding: 6px 12px !important;
+    font-size: 12px;
+  }
+  .navbarIcon span {
+    width: 30px;
+    height: 30px;
+  }
+  .avatarImage {
+    width: 32px;
+    height: 32px;
+  }
+
+  h1 {
+    font-size: 18px !important;
+    line-height: 24px;
+  }
+  .topLeftSide h2 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .topLeftSide p {
+    font-size: 13px;
+  }
+  .favoritesCard .topPart h3,
+  .emergencyCard .topPart h3 {
+    font-size: 14px;
+  }
+  .contactDetails h3 {
+    font-size: 14px !important;
+  }
+  .modal-title {
+    font-size: 16px !important;
+  }
+
+  .aboutContract {
+    padding: 90px 0 30px;
+  }
+  .contractDetails .box {
+    padding: 10px !important;
+    column-gap: 10px !important;
+  }
+  .contractDetails .aboutContractIcon {
+    width: 36px;
+    height: 36px;
+  }
+  .contractDetails .aboutContractIcon i {
+    font-size: 14px;
+  }
+  .textDetails p:first-child {
+    font-size: 11px;
+  }
+
+  .allContracts {
+    padding-top: 20px;
+  }
+  .searchInput {
+    padding: 8px !important;
+  }
+  .searchInput input {
+    font-size: 13px !important;
+  }
+
+  .box {
+    padding: 12px !important;
+  }
+  .contactDetails .aboutContractIcon {
+    width: 45px;
+    height: 45px;
+  }
+  .badge1,
+  .badge2 {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+  .links .linkIcon {
+    width: 30px;
+    height: 30px;
+  }
+  .buttons {
+    column-gap: 6px !important;
+  }
+  .buttons .actionBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .rightSide {
+    margin-bottom: 16px !important;
+  }
+
+  .modal-dialog {
+    max-width: 95% !important;
+    margin: 10px auto !important;
+  }
+  .modal-content {
+    padding: 6px !important;
+  }
+  .modal-body {
+    padding: 12px !important;
+  }
+  .userIcon {
+    width: 70px;
+    height: 70px;
+    font-size: 22px !important;
+  }
+  .modal-footer {
+    row-gap: 8px;
+  }
+  .modal-footer button {
+    width: 100% !important;
+    padding: 12px !important;
+  }
+}
+
+/* ===========   TABLET (min-width: 577px) and (max-width: 991px)================*/
+@media (min-width: 577px) and (max-width: 991px) {
+  h1 {
+    font-size: 20px !important;
+  }
+  .topLeftSide h2 {
+    font-size: 26px;
+  }
+  .modal-title {
+    font-size: 18px !important;
+  }
+
+  .aboutContract {
+    padding: 90px 0 40px;
+  }
+  .rightSide {
+    margin-bottom: 18px !important;
+  }
+
+  .addContact {
+    padding: 8px 18px !important;
+  }
+
+  .modal-dialog {
+    max-width: 70% !important;
+    margin: 1.75rem auto !important;
+  }
+  .modal-body {
+    padding: 16px !important;
+  }
+}
+
+/* ====================DESKTOP (min-width: 992px)========================*/
+@media (min-width: 992px) {
+  .modal-dialog {
+    max-width: 40% !important;
+  }
+  .modal-body {
+    padding: 1.5rem !important;
+  }
+}
